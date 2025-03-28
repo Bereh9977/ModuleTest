@@ -63,3 +63,18 @@ def test_read_and_sort_population_data_parametrized(tmp_path, data, expected_are
     # Перевірка порядку за населенням
     pop_names = [country['name'] for country in sorted_by_population]
     assert pop_names == expected_pop_order
+
+# Тестування функції print_sorted_data з перенаправленням виводу
+def test_print_sorted_data_output(sample_data_file, capsys):
+    sorted_by_area, sorted_by_population = read_and_sort_population_data(sample_data_file)
+    print_sorted_data(sorted_by_area, sorted_by_population)
+    
+    captured = capsys.readouterr()
+    output = captured.out
+    
+    assert "Відсортовано за площею (убування):" in output
+    assert "Відсортовано за населенням (убування):" in output
+    assert "Canada" in output
+    assert "9984670.00" in output
+    assert "Brazil" in output
+    assert "214000000" in output
