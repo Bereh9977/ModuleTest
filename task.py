@@ -33,3 +33,13 @@ def print_sorted_data(sorted_by_area, sorted_by_population):
     print("-" * 50)
     for country in sorted_by_population:
         print(f"{country['name']:<12} | {country['area']:>11.2f} | {country['population']:>11}")
+
+def main():
+    filename = "data.txt"
+    print(f">>> read_and_sort_population_data(\"{filename}\")")
+    
+    sorted_by_area, sorted_by_population = read_and_sort_population_data(filename)
+    print_sorted_data(sorted_by_area, sorted_by_population)
+
+if __name__ == "__main__":
+    main()
