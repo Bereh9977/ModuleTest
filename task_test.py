@@ -11,6 +11,21 @@ def sample_data_file(tmp_path):
     file_path.write_text(data, encoding='utf-8')
     return str(file_path)
 
+def test_read_and_sort_population_data_basic(sample_data_file):
+    sorted_by_area, sorted_by_population = read_and_sort_population_data(sample_data_file)
+    
+    # Перевірка кількості країн
+    assert len(sorted_by_area) == 4
+    assert len(sorted_by_population) == 4
+    
+    # Перевірка сортування за площею (убування)
+    assert sorted_by_area[0]['name'] == "Canada"  # Найбільша площа
+    assert sorted_by_area[-1]['name'] == "Japan"  # Найменша площа
+    
+    # Перевірка сортування за населенням (убування)
+    assert sorted_by_population[0]['name'] == "Brazil"  # Найбільше населення
+    assert sorted_by_population[-1]['name'] == "Canada"  # Найменше населення
+
 @pytest.mark.parametrize("data, expected_area_order, expected_pop_order", [
     # Тест 1: Дві країни
     (
