@@ -78,3 +78,9 @@ def test_print_sorted_data_output(sample_data_file, capsys):
     assert "9984670.00" in output
     assert "Brazil" in output
     assert "214000000" in output
+
+# Тестування поведінки при None
+def test_print_sorted_data_none(capsys):
+    print_sorted_data(None, None)
+    captured = capsys.readouterr()
+    assert "Дані для виведення відсутні" in captured.out
